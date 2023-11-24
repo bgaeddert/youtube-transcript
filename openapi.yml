@@ -1,0 +1,64 @@
+openapi: 3.0.0
+info:
+  title: YouTube Video Details API
+  version: 1.0.0
+  description: API to fetch details of a YouTube video including title, channel, and transcript.
+servers:
+  - url: http://example.com
+
+paths:
+  /:
+    get:
+      summary: Get video details
+      description: Returns the details of a YouTube video including title, channel, and transcript.
+      parameters:
+        - in: query
+          name: video
+          schema:
+            type: string
+          required: true
+          description: The URL or ID of the YouTube video.
+      responses:
+        '200':
+          description: Video details retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url:
+                    type: string
+                    example: 'https://www.youtube.com/watch?v=B6oRi9TIkyQ'
+                  title:
+                    type: string
+                    example: 'Example Video Title'
+                  channel:
+                    type: string
+                    example: 'Example Channel Name'
+                  transcript:
+                    type: string
+                    example: 'This is the video transcript in plain text...'
+        '400':
+          description: Bad request. When the video URL or ID is not provided or invalid.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: 'Please provide a valid video URL or id'
+
+components:
+  schemas:
+    VideoDetails:
+      type: object
+      properties:
+        url:
+          type: string
+        title:
+          type: string
+        channel:
+          type: string
+        transcript:
+          type: string
