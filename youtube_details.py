@@ -10,6 +10,10 @@ def get_video_details(url):
     # if video id is not found, return in json format
     if not video_id:
         raise Exception('Please provide a valid video URL or id')
+    
+    # if video id is not 11 characters, return in json format
+    if len(video_id) != 11:
+        raise Exception(f'"{video_id}" is not a valid video id')
 
     # create a youtube link with the video id
     url = f'https://www.youtube.com/watch?v={video_id}'
